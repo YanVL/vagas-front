@@ -1,11 +1,13 @@
 <script>
 import PesquisarVaga from '@/components/comuns/PesquisarVaga.vue'
 import IndicadorComponent from '@/components/comuns/IndicadorComponent.vue'
+import VagaComponent from '@/components/comuns/VagaComponent.vue'
 
 export default {
   components: {
     PesquisarVaga,
-    IndicadorComponent
+    IndicadorComponent,
+    VagaComponent,
   },
   data: () => ({
     usuariosOnline: 0
@@ -26,6 +28,12 @@ export default {
     <div class="row">
       <div class="col">
         <PesquisarVaga></PesquisarVaga>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col">
+        <VagaComponent></VagaComponent>
       </div>
     </div>
 
