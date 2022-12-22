@@ -6,7 +6,7 @@
         </div>
         <div class="card-footer">
             <small class="text-muted">Salário: R$ {{ salario }}| Modalidade: {{ modalidade }} | Tipo: {{ tipo }} |
-                Publicação: {{ publicacao }}
+                Publicação: {{ getPublicacao }}
             </small>
         </div>
     </div>
@@ -14,6 +14,12 @@
 
 <script>
 export default {
-    props: ['titulo', 'descricao', 'salario', 'modalidade', 'tipo', 'publicacao']
+    props: ['titulo', 'descricao', 'salario', 'modalidade', 'tipo', 'publicacao'],
+    computed: {
+        getPublicacao() {
+            let dataPublicacao = new Date(this.publicacao)
+            return dataPublicacao.toLocaleDateString('pt-BR')
+        }
+    }
 }
 </script>

@@ -3,31 +3,24 @@ import HomeComponent from '@/components/views/HomeComponent.vue'
 import PublicarVaga from '@/components/views/PublicarVaga.vue'
 
 export default {
-    components: {
-      HomeComponent,
-      PublicarVaga
-    },
-    data: () => ({
-      teste: 'O componente foi criado',
-      titulo: 'Componente Conteudo',
-      conteudo: 'home-component'
-    }),
-    methods: {
-      atualizarComponente() {
-        this.titulo += '*'
-      }
-    },
+  props: {
+    conteudo: {
+      type: String,
+      required: true
+    }
+  },
+  components: {
+    HomeComponent,
+    PublicarVaga
   }
+}
 </script>
 
 <template>
   <div>
-
-    <button @click="conteudo = 'home-component'">Home</button>
-    <button @click=" conteudo = 'publicar-vaga'">Publicar vaga</button>    
-
-    <component :is="conteudo"></component>
-
+    <keep-alive>
+      <component :is="conteudo" />
+    </keep-alive>
   </div>
 </template>
 

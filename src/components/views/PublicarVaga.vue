@@ -9,29 +9,29 @@ export default {
   methods: {
     salvarVaga() {
 
+      let tempoDecorrido = Date.now()
+      let dataAtual = new Date(tempoDecorrido)
       let vagas = JSON.parse(localStorage.getItem('vagas'))
 
       if(!vagas) vagas = []
-
       let vaga = {
         titulo: this.titulo,
         descricao: this.descricao,
         salario: this.salario,
         modalidade: this.modalidade,
-        tipo: this.tipo
+        tipo: this.tipo,
+        publicacao: dataAtual.toISOString()
       }
 
       vagas.push(vaga)
-
       localStorage.setItem('vagas', JSON.stringify(vagas))
-
     }
   }
 }
 </script>
 
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <div class="col">
         <h4>Apresente a sua vaga para milhares de profissionais de graça</h4>
