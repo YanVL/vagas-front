@@ -14,7 +14,7 @@ export default {
       let dataAtual = new Date(tempoDecorrido)
       let vagas = JSON.parse(localStorage.getItem('vagas'))
 
-      if(!vagas) vagas = []
+      if (!vagas) vagas = []
       let vaga = {
         titulo: this.titulo,
         descricao: this.descricao,
@@ -25,17 +25,42 @@ export default {
       }
 
       vagas.push(vaga)
-      localStorage.setItem('vagas', JSON.stringify(vagas))
 
-      this.resetaFormularioCadastroVaga();
+      if (this.validaFormulario()) {
+        localStorage.setItem('vagas', JSON.stringify(vagas))
+        this.emitter.emit('alerta', {
+          tipo: 'sucesso',
+          titulo: `A vaga ${this.titulo} foi cadastrada com sucesso!`,
+          descricao: 'Vaga foi cadastrada e poderá ser consultada por milhares de profissionais em nossa plataforma!'
+        })
+
+        this.resetaFormularioCadastroVaga();
+
+      } else {
+        this.emitter.emit('alerta', {
+          tipo: 'erro',
+          titulo: 'Não foi possível realizar o cadastro.',
+          descricao: 'Verifique se todos os campos foram preenchidos corretamente.'
+        })
+      }
     },
-
     resetaFormularioCadastroVaga() {
       this.titulo = '',
-      this.descricao = '',
-      this.salario = '',
-      this.modalidade = '',
-      this.tipo = ''
+        this.descricao = '',
+        this.salario = '',
+        this.modalidade = '',
+        this.tipo = ''
+    },
+    validaFormulario() {
+      let valido = true
+
+      if (this.titulo === '') valido = false
+      if (this.descricao === '') valido = false
+      if (this.salario === '') valido = false
+      if (this.modalidade === '') valido = false
+      if (this.tipo === '') valido = false
+
+      return valido
     }
   }
 }

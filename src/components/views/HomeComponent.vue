@@ -11,7 +11,7 @@ export default {
   },
   data: () => ({
     usuariosOnline: 0,
-    vagas: [ ]
+    vagas: []
   }),
   methods: {
     getUsuariosOnline() {
@@ -21,9 +21,14 @@ export default {
   created() {
     setInterval(this.getUsuariosOnline, 1000);
   },
-  mounted () {
+  mounted() {
     this.vagas = JSON.parse(localStorage.getItem('vagas'))
-  }
+    this.emitter.on('filtrarVagas', vaga => {
+      const vagas = JSON.parse(localStorage.getItem('vagas'))
+      this.vagas = vagas.filter(reg => reg.titulo.toLowerCase().includes(vaga.titulo.toLowerCase()))
+    })
+  },
+
 }
 </script>
 
